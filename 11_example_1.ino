@@ -28,7 +28,7 @@
  
 #define _DUTY_MIN 500 // servo full clockwise position (0 degree)
 #define _DUTY_NEU 1500 // servo neutral position (90 degree)
-#define _DUTY_MAX 3200 // servo full counterclockwise position (180 degree)
+#define _DUTY_MAX 2500 // servo full counterclockwise position (180 degree)
 
 // global variables
 float  dist_ema, dist_prev = _DIST_MAX; // unit: mm
@@ -75,17 +75,7 @@ void loop() {
 
   // Apply ema filter here  
    dist_ema = (dist_raw*_EMA_ALPHA)+(1-_EMA_ALPHA)*dist_ema;
-  /*
-  // adjust servo position according to the USS read value
-  // add your code here!
-  if (dist_raw <= _TARGET_LOW) {
-    myservo.writeMicroseconds(_DUTY_MIN ); 
-  } else if (dist_raw >= _TARGET_HIGH) {
-      myservo.writeMicroseconds(_DUTY_MAX);
-  } else {
-     myservo.writeMicroseconds(_DUTY_NEU); 
-  }
-  */
+
   
      long value = map(dist_ema, 180, 360 , _DUTY_MIN, _DUTY_MAX );
      
